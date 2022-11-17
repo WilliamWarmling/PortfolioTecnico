@@ -1,0 +1,98 @@
+private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        Object[] options = {"Aluno(a)", "Funcionário(a)"};
+        int a = JOptionPane.showOptionDialog(null, "Deseja excluir um aluno ou funcionário", "Escolha de exclusão", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+        switch(a){
+            case 0:
+            for(Aluno aluno : lista){
+                if(campoMatricula.getText().equals(aluno.getMatricula())){
+                    lista.remove(aluno);
+                    JOptionPane.showInputDialog(this, "Exclusão concluída!");
+                }
+            }
+            break;
+            case 1:
+                for(Funcionario func : listaF){
+                if(campoMatricula.getText().equals(func.getMatriculaF())){
+                    lista.remove(func);
+                    JOptionPane.showInputDialog(this, "Exclusão concluída!");
+                }
+        }
+}
+
+private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        Object[] options = {"Nome", "Idade", "CPF", "Matrícula"};
+        Object[] options2 = {"Aluno(a)", "Funcionário(a)"};
+
+        String matricula = campoMatricula.getText();
+        
+        if (verificarMatriculaAluno(matricula) == true || verificarMatriculaFuncionario(matricula) == true) {
+            int escolha = JOptionPane.showOptionDialog(null, "O cadastro é de aluno(a) ou funcionário(a)? ", "Opções de edição", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options2, options2[0]);
+
+            switch (escolha) {
+                case 0:
+                    for (Aluno aluno : lista) {
+                        if (aluno.getMatricula().equals(matricula)) {
+                            int infoEdit = JOptionPane.showOptionDialog(null, "Qual informação de " + aluno.getNome() + " deseja editar)? ", "Opções de edição", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+                            switch (infoEdit) {
+                                case 0:
+                                    String novoNome = JOptionPane.showInputDialog(null, "Deseja substituir " + aluno.getNome() + " por qual nome?");
+                                    aluno.setNome(novoNome);
+                                    JOptionPane.showMessageDialog(this, "Edição realizada!", "Edição completa", JOptionPane.INFORMATION_MESSAGE);
+                                    break;
+                                case 1:
+                                    int novaIdade = Integer.parseInt(JOptionPane.showInputDialog(null, "Deseja substituir " + campoNome.getText() + " por qual nome?"));
+                                    aluno.setIdade(novaIdade);
+                                    JOptionPane.showMessageDialog(this, "Edição realizada!", "Edição completa", JOptionPane.INFORMATION_MESSAGE);
+                                    break;
+
+                                case 2:
+                                    String novoCPF = JOptionPane.showInputDialog(null, "Deseja substituir " + aluno.getNome() + " por qual nome?");
+                                    aluno.setCpf(novoCPF);
+                                    JOptionPane.showMessageDialog(this, "Edição realizada!", "Edição completa", JOptionPane.INFORMATION_MESSAGE);
+                                    break;
+
+                                case 3:
+                                    String novaMatricula = JOptionPane.showInputDialog(null, "Deseja substituir " + aluno.getNome() + " por qual nome?");
+                                    aluno.setMatricula(novaMatricula);
+                                    JOptionPane.showMessageDialog(this, "Edição realizada!", "Edição completa", JOptionPane.INFORMATION_MESSAGE);
+                                    break;
+                            }
+                            break;
+                        }
+                    }
+                case 1:
+                    for (Funcionario func : listaF) {
+                            if (func.getMatriculaF().equals(matricula)) {
+                                int infoEdit = JOptionPane.showOptionDialog(null, "Qual informação de " + func.getNome() + " deseja editar)? ", "Opções de edição", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+                                switch (infoEdit) {
+                                    case 0:
+                                        String novoNome = JOptionPane.showInputDialog(null, "Deseja substituir " + func.getNome() + " por qual nome?");
+                                        func.setNome(novoNome);
+                                        JOptionPane.showMessageDialog(this, "Edição realizada!", "Edição completa", JOptionPane.INFORMATION_MESSAGE);
+                                        break;
+                                    case 1:
+                                        int novaIdade = Integer.parseInt(JOptionPane.showInputDialog(null, "Deseja substituir " + func.getNome() + " por qual idade?"));
+                                        func.setIdade(novaIdade);
+                                        JOptionPane.showMessageDialog(this, "Edição realizada!", "Edição completa", JOptionPane.INFORMATION_MESSAGE);
+                                        break;
+
+                                    case 2:
+                                        String novoCPF = JOptionPane.showInputDialog(null, "Deseja substituir " + func.getNome() + " por qual CPF?");
+                                        func.setCpf(novoCPF);
+                                        JOptionPane.showMessageDialog(this, "Edição realizada!", "Edição completa", JOptionPane.INFORMATION_MESSAGE);
+                                        break;
+
+                                    case 3:
+                                        String novaMatriculaF = JOptionPane.showInputDialog(null, "Deseja substituir " + func.getNome() + " por qual matrícula?");
+                                        func.setMatriculaF(novaMatriculaF);
+                                        JOptionPane.showMessageDialog(this, "Edição realizada!", "Edição completa", JOptionPane.INFORMATION_MESSAGE);
+                                        break;
+                                }
+                                break;
+                            }
+                        }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Matrícula inválida");
+        }
+    }
